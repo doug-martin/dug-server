@@ -1,0 +1,86 @@
+[
+    {
+        "port" : "3343",
+        "host" : "localhost",
+        "path" : "",
+        "filters" : [
+            {
+                "filter" : "SessionFilter",
+                "path" : "*",
+                "init" : {
+                    "domain" : "",
+                    "path" : "/",
+                    "persistent" : true,
+                    "timeOutInterval" : 30000,
+                    "lifetime" : 10000,
+                    "salt" : "ABCD",
+                    "secure" : false,
+                    "httpOnly" : false,
+                    "sessionId" : "dug-server"
+                }
+            },
+            {
+                "filter" : "./filters/SessionCounterFilter",
+                "path" : "*"
+            }
+        ],
+        "GET" : {
+            "dirs" : [
+                {
+                    "path" : "/js/*",
+                    "dir" : "./web/js"
+                },
+                {
+                    "path" : "/admin/css/*",
+                    "dir" : "./web/admin/css",
+                    "session" : true
+                },
+                {
+                    "path" : "/css/*",
+                    "dir" : "./web/css"
+                }
+            ],
+            "methods" : [
+                {
+                    "handler" : "./services/sessionApp",
+                    "operations" : [
+                        {
+                            "method" : "hello",
+                            "path" : "/hello"
+                        },
+                        {
+                            "method" : "bye",
+                            "path" : "/bye"
+                        },
+                        {
+                            "method" : "helloWithName",
+                            "path" : "/hello/:name",
+                            "params" : "name"
+                        },
+                        {
+                            "method" : "bye",
+                            "path" : "/bye/:name",
+                            "params" : "name"
+                        }
+                    ]
+                }
+            ]
+        },
+        "welcomeFiles" :  [
+            {
+                "path" : "",
+                "file" : "./web/index.html"
+            }
+        ],
+        "errorFiles" : [
+            {
+                "code" : 404,
+                "file" : "./web/error.html"
+            },
+            {
+                "code" : 405,
+                "file" : "./web/error.html"
+            }
+        ]
+    }
+]

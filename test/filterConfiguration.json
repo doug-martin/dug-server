@@ -1,0 +1,55 @@
+[
+    {
+        "port" : "3343",
+        "host" : "localhost",
+        "path" : "",
+        "filters" : [
+            {
+                "filter" : "./filters/TestFilterTwo",
+                "path" : "/hello/:name",
+                "params" : "name"
+            },
+            {
+                "filter" : "./filters/TestFilter",
+                "path" : "*"
+            }
+        ],
+        "GET" : {
+            "methods" : [
+                {
+                    "handler" : "./services/app",
+                    "operations" : [
+                        {
+                            "method" : "hello",
+                            "path" : "/hello"
+                        },
+                        {
+                            "method" : "bye",
+                            "path" : "/bye"
+                        },
+                        {
+                            "method" : "helloWithName",
+                            "path" : "/hello/:name",
+                            "params" : "name"
+                        },
+                        {
+                            "method" : "bye",
+                            "path" : "/bye/:name",
+                            "params" : "name"
+                        }
+                    ]
+                }
+            ]
+        },
+        "errorFiles" : [
+            {
+                "code" : 404,
+                "file" : "./web/error.html"
+            },
+            {
+                "code" : 405,
+                "file" : "./web/error.html"
+            }
+        ]
+    }
+]

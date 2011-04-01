@@ -1,0 +1,17 @@
+#!/usr/bin/env node
+
+var dug = require("dug-server");
+
+
+var printUsage = function() {
+    console.log("USAGE : <location_of_configuration>");
+    console.log("DEFAULTS :\n\tserver.json")
+}
+
+var processArguments = function(argsArr){
+    console.log(argsArr)
+   return argsArr.length == 1 ? argsArr[0] : "server.json";
+};
+
+
+var args = dug.createServer(processArguments(process.argv.slice(2)));
